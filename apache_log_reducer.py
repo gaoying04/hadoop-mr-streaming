@@ -1,13 +1,9 @@
 import sys
-from page_counter import PageCounter
-import operator
 
 class ApacheLogReducer():
 
     sysin = sys.stdin
     sysout = sys.stdout
-
-    pageCounter = PageCounter()
 
     def get_data(self):
         return self.sysin
@@ -16,14 +12,23 @@ class ApacheLogReducer():
         self.sysout.write("{0}\t{1}\n".format(page, count))
 
     def reduce(self):
+        page = ""
+        currentPage = None
+        count = 0
         for line in self.get_data():
-            self.pageCounter.add_line(line)
+            fields = line.split()
+            ip = fields[-1]
+            page = fields[0]
+            if page != currentPage:
+                if count > 0:
+                    self.save_data(page, count)
+                currentPage = page
+                count = 1
+            else:
+                count = count + 1
 
-        d = self.pageCounter.ranked_pages
-        sorted_x = sorted(d.items(), key=lambda x: x[1])
-        for page in sorted_x:
-            self.save_data(page[0], self.pageCounter.ranked_pages[page[0]])
-
+        # Don't forget the last page.
+        self.save_data(page, count)
 
 if __name__ == "__main__":
     alm = ApacheLogReducer()
