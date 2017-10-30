@@ -1,5 +1,6 @@
 import sys
 from page_counter import PageCounter
+import operator
 
 class ApacheLogReducer():
 
@@ -18,8 +19,10 @@ class ApacheLogReducer():
         for line in self.get_data():
             self.pageCounter.add_line(line)
 
-        for page in self.pageCounter.ranked_pages:
-            self.save_data(page, self.pageCounter.ranked_pages[page])
+        d = self.pageCounter.ranked_pages
+        sorted_x = sorted(d.items(), key=lambda x: x[1])
+        for page in sorted_x:
+            self.save_data(page[0], self.pageCounter.ranked_pages[page[0]])
 
 
 if __name__ == "__main__":
