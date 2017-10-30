@@ -4,7 +4,7 @@ import unittest
 import mock
 
 
-class TestApacheParser(unittest.TestCase):
+class apache_parser_test(unittest.TestCase):
 
     @mock.patch('apache_parser.logging')
     def test_parse_invalid_line(self, my_mock):
