@@ -9,7 +9,7 @@ class ApacheLogReducer():
         return self.sysin
 
     def save_data(self, page, count):
-        self.sysout.write("{0}\t{1}\n".format(page, count))
+        print("{0}\t{1}".format(page, count))
 
     def reduce(self):
         page = ""

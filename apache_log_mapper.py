@@ -13,7 +13,7 @@ class ApacheLogMapper():
         return self.sysin
 
     def save_data(self, request, host):
-        self.sysout.write("{0}\t{1}\n".format(request.split()[1], host))
+        print("{0}\t{1}".format(request.split()[1], host))
         return
 
     def parse(self):
