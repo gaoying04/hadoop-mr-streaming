@@ -32,9 +32,6 @@ class apache_parser_test(unittest.TestCase):
         self.assertFalse(my_mock.log.called, "Logged error when none should have been logged.")
 
 
-    def runTest(self):
-        pass
-
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     for method in dir(apache_parser_test):
