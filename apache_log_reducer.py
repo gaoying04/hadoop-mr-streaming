@@ -21,7 +21,7 @@ class ApacheLogReducer():
             page = fields[0]
             if page != currentPage:
                 if count > 0:
-                    self.save_data(page, count)
+                    self.save_data(currentPage, count)
                 currentPage = page
                 count = 1
             else:
