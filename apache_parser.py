@@ -1,6 +1,7 @@
 import logging
 import re
 
+
 class apache_parser:
 
     def parse(self, line):
