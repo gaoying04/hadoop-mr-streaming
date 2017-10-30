@@ -20,7 +20,7 @@ class ApacheLogMapper():
         for line in self.get_data():
             data = self.parser.parse(line)
             if data is not None:
-                self.save_data(data["request"], data["host"])
+                self.save_data(data["request"], data["time"])
 
 
 if __name__ == "__main__":
