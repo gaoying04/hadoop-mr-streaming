@@ -28,7 +28,7 @@ class apache_parser_test(unittest.TestCase):
         self.assertTrue(result["request"] == 'GET /assets/js/lowpro.js HTTP/1.1')
         self.assertTrue(result["status"] == '200')
         self.assertTrue(result["size"] == '10469')
-
+        self.assertTrue(False)
         self.assertFalse(my_mock.log.called, "Logged error when none should have been logged.")
 
 if __name__ == "__main__":
