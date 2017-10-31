@@ -1,7 +1,9 @@
 #!/usr/bin/python
-import sys
-from apache_parser import apache_parser as Parser
 import logging
+import sys
+
+from applib.apache_parser import apache_parser as Parser
+
 # logging.basicConfig(filename='mapper.log', level=logging.DEBUG)
 
 # sysin = sys.stdin

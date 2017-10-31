@@ -1,7 +1,8 @@
-from apache_parser import apache_parser as Parser
-
 import unittest
+
 import mock
+
+from applib.apache_parser import apache_parser as Parser
 
 
 class apache_parser_test(unittest.TestCase):
