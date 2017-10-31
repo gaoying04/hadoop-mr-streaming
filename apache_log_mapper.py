@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys
 from apache_parser import apache_parser as Parser
 
@@ -25,7 +26,7 @@ class ApacheLogMapper():
     def parse(self):
         self.local_log.write("Starting mapper job")
         try:
-            for line in self.get_data():
+            for line in sys.stdin:
                 data = self.parser.parse(line)
                 if data is not None:
                     self.save_data(data["request"], data["time"])
