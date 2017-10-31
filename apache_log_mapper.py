@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import logging
 import sys
+sys.path.append('./')
 
 from apache_parser import apache_parser as Parser
 
