@@ -26,7 +26,7 @@ class ApacheLogMapper():
             for line in self.sysin:
                 data = self.parser.parse(line)
                 if data is not None:
-                    self.save_data(data["request"].split()[0], data["time"])
+                    self.save_data(data["request"], data["time"])
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
         finally:
