@@ -10,9 +10,7 @@ parser = Parser()
 
 
 def save_data(request, host):
-    sysout.write("{0}\t{1}\n".format(request.split()[1], host))
-    sysout.flush()
-    return
+    print("{0}\t{1}\n".format(request.split()[1], host))
 
 
 def parse():
