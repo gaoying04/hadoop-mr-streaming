@@ -45,3 +45,5 @@ ERROR:root:An error has occurred:
 list index out of range
 
 DEBUG:root:Mapping complete. Closing local mapper log file.
+DEBUG:root:Starting mapper job
+DEBUG:root:Mapping complete. Closing local mapper log file.
