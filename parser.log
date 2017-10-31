@@ -6,3 +6,8 @@ DEBUG:root:Starting mapper job
 DEBUG:root:Mapping complete. Closing local mapper log file.
 DEBUG:root:Starting mapper job
 DEBUG:root:Mapping complete. Closing local mapper log file.
+ERROR:root:An error has occurred:
+list indices must be integers, not str
+
+DEBUG:root:Mapping complete. Closing local mapper log file.
+DEBUG:root:Mapping complete. Closing local mapper log file.
