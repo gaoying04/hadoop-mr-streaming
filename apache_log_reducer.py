@@ -2,31 +2,35 @@
 import sys
 
 
-sysin = sys.stdin
-sysout = sys.stdout
+class ApacheLogReducer():
 
-def save_data(page, count):
-    print("{0}\t{1}".format(page, count))
+    sysin = sys.stdin
+    sysout = sys.stdout
 
-def reduce():
-    page = ""
-    currentPage = None
-    count = 0
+    def save_data(self, page, count):
+        self.sysout.write("{0}\t{1}\n".format(page, count))
+        self.sysout.flush
 
-    for line in sysin:
-        fields = line.split()
-        ip = fields[-1]
-        page = fields[0]
-        if page != currentPage:
-            if count > 0:
-                save_data(currentPage, count)
-            currentPage = page
-            count = 1
-        else:
-            count = count + 1
+    def reduce(self):
+        page = ""
+        currentPage = None
+        count = 0
 
-    # Don't forget the last page.
-    save_data(page, count)
+        for line in self.sysin:
+            fields = line.split()
+            ip = fields[-1]
+            page = fields[0]
+            if page != currentPage:
+                if count > 0:
+                    self.save_data(currentPage, count)
+                currentPage = page
+                count = 1
+            else:
+                count = count + 1
 
-#Do the work here...
-reduce()
+        # Don't forget the last page.
+        self.save_data(page, count)
+
+if __name__ == "main":
+    reducer = ApacheLogReducer
+    reducer.reduce()
