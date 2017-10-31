@@ -1,42 +1,31 @@
 #!/usr/bin/python
 import sys
 from apache_parser import apache_parser as Parser
+import logging
+logging.basicConfig(filename='mapper.log', level=logging.DEBUG)
+
+sysin = sys.stdin
+sysout = sys.stdout
+parser = Parser()
 
 
-class ApacheLogMapper():
+def save_data(request, host):
+    sysout.write("{0}\t{1}\n".format(request.split()[1], host))
+    sysout.flush()
+    return
 
-    local_log = None
 
-    def __init__(self):
-        self.local_log = open("mapper_logfile", "w")
+def parse():
+    logging.debug("Starting mapper job")
+    try:
+        for line in sys.stdin:
+            data = parser.parse(line)
+            if data is not None:
+                save_data(data["request"], data["time"])
+    except Exception as ex:
+        logging.error("An error has occurred:\n{0}\n".format(ex.message))
+    finally:
+        logging.debug("Mapping complete. Closing local mapper log file.")
 
-    sysin = sys.stdin
-    sysout = sys.stdout
-
-    parser = Parser()
-
-    def get_data(self):
-        return self.sysin
-
-    def save_data(self, request, host):
-        self.sysout.write("{0}\t{1}\n".format(request.split()[1], host))
-        self.sysout.flush()
-        return
-
-    def parse(self):
-        self.local_log.write("Starting mapper job")
-        try:
-            for line in sys.stdin:
-                data = self.parser.parse(line)
-                if data is not None:
-                    self.save_data(data["request"], data["time"])
-        except Exception as ex:
-            self.local_log.write("An error has occurred:\n{0}\n".format(ex.message))
-        finally:
-            self.local_log.write("Mapping complete. Closing local mapper log file.")
-            self.local_log.flush()
-            self.local_log.close()
-
-if __name__ == "__main__":
-    alm = ApacheLogMapper()
-    alm.parse()
+#Do the work
+parse()

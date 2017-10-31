@@ -1,6 +1,7 @@
 import logging
 import re
 
+logging.basicConfig(filename='parser.log', level=logging.DEBUG)
 
 class apache_parser:
 
