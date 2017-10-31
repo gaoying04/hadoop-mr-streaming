@@ -11,8 +11,8 @@ class ApacheLogReducer():
         self.sysout.write("{0}\t{1}\n".format(page, count))
         self.sysout.flush
 
-    def reduce(self):
-        print("Got to here.")
+    def reduce(self, key):
+        result = None
         page = ""
         currentPage = None
         count = 0
@@ -24,6 +24,8 @@ class ApacheLogReducer():
             if page != currentPage:
                 if count > 0:
                     self.save_data(currentPage, count)
+                    if key is not None and key in currentPage:
+                        result = count
                 currentPage = page
                 count = 1
             else:
@@ -31,7 +33,8 @@ class ApacheLogReducer():
 
         # Don't forget the last page.
         self.save_data(page, count)
+        return result
 
 if __name__ == "__main__":
     reducer = ApacheLogReducer()
-    reducer.reduce()
+    reducer.reduce(None)
