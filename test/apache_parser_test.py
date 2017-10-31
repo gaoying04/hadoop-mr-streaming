@@ -9,7 +9,7 @@ class apache_parser_test(unittest.TestCase):
     @mock.patch('apache_parser.logging')
     def test_parse_invalid_line(self, my_mock):
         parser = Parser()
-
+        parser.logging = my_mock
         result = parser.parse("stuff")
         self.assertTrue(my_mock.log.called, "Failed to log an error message.")
         self.assertTrue(result is None)
@@ -17,7 +17,7 @@ class apache_parser_test(unittest.TestCase):
     @mock.patch('apache_parser.logging')
     def test_valid_line(self, my_mock):
         parser = Parser()
-
+        parser.logging = my_mock
         result = parser.parse('10.223.157.186 - - [15/Jul/2009:15:50:35 -0700] "GET /assets/js/lowpro.js HTTP/1.1" 200 10469')
 
         self.assertTrue(len(result) == 7)

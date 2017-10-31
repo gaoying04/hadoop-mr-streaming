@@ -15,5 +15,5 @@ class apache_parser:
             return result
 
         except Exception:
-            #logging.log(logging.WARNING, "Error parsing line.")
+            logging.log(logging.WARNING, "Error parsing line.")
             return None
