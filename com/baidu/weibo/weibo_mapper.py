@@ -20,7 +20,8 @@ if __name__ == '__main__':
                 line_hdfs_json = json.loads(line,encoding='utf-8')
                 for word in get_config_data():
                     if(word in str(line_hdfs_json)):
-                        print '%s%s%d' % (word, '\t', 1)
+                        #print '%s%s%d' % (word, '\t', 1)
+                        sys.stdout('%s%s%d' % (word, '\t', 1))
             except Exception as e:
                 continue
 
