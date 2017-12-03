@@ -5,6 +5,7 @@ import json
 sysin = sys.stdin
 sysout = sys.stdout
 DATA_DIR = os.path.join(os.path.expanduser("~"), "data")
+print(DATA_DIR)
 #DATA_URL = "/".join(["http://cp01-yuanfang-01.epc.baidu.com:8080", "data"])
 def get_config_data():
     fp = open(DATA_DIR,"wr")
