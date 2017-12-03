@@ -20,7 +20,8 @@ if __name__ == '__main__':
                 for word in get_config_data():
                     if(word in str(hdfs_log)):
                         #print '%s%s%d' % (word, '\t', 1)
-                        sys.stdout('%s%s%d' % (word, '\t', 1))
+                        sys.stdout.write('%s%s%d' % (word, '\t', 1))
+                        sys.stdout.flush()
         except Exception as e:
             continue
 
