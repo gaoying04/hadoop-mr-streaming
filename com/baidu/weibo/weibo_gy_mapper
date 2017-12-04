@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+import os
+import sys
+import json
+sys.path.append('/root/data/weibo_data')
+sysin = sys.stdin
+sysout = sys.stdout
+config_path= os.path.append("/root/data/filter_data")
+print(config_path)
+#DATA_URL = "/".join(["http://cp01-yuanfang-01.epc.baidu.com:8080", "data"])
+ def get_config_data():
+   with open(config_path,"r") as fp
+    line_list= []
+    for line in fp.readlines():
+        line_list.append(line.strip())
+    return line_list
+
+ def job_filter(jobs_map, base_cls):
+       """ filter every job """
+       for word in jobs_map.items():
+            if (word in str(base_cls)):
+                   # print '%s%s%d' % (word, '\t', 1)
+                   sys.stdout.write('%s%s%d' % (word, '\t', 1))
+                   sys.stdout.flush()
+ def gen_base_dict(base_cls):
+    """ gen_base_dict """
+    res = dict()
+    # res.update(base_cls["_issue"])
+    res["content"] = base_cls["_issue"]["content"]
+    res["publish_time"] = base_cls["_issue"]["publish_time"]
+    res["user_name"] = base_cls["_issue"]["user_name"]
+
+    res["url"] = base_cls["_issue"]["url"]
+    res["weibo_bmiddle_pic"] = base_cls["_issue"]["weibo_bmiddle_pic"]
+    res["weibo_original_pic"] = base_cls["_issue"]["weibo_original_pic"]
+    res["weibo_thumbnail_pic"] = base_cls["_issue"]["weibo_thumbnail_pic"]
+
+    res["weibo_retweet_text"] = base_cls["_issue"]["weibo_retweet_text"]
+    res["weibo_retweet_id"] = base_cls["_issue"]["weibo_retweet_id"]
+    res["user_id"] = base_cls["_issue"]["user_id"]
+    res["weibo_retweet_user_name"] = base_cls["_issue"]["weibo_retweet_user_name"]
+    res["keywords"] = base_cls["keywords"]
+    res["save_time"] = base_cls["_time"]
+    res["job_ids"] = base_cls["job_ids"]
+    return json.dumps(res, encoding='utf-8', ensure_ascii=False)
+    # return res
+
+if __name__ == '__main__':
+    ##jobs_map = read_job_config()
+    # print json.dumps(account_list, encoding='utf-8', ensure_ascii=False)
+    # print json.dumps(keywords_groups, encoding='utf-8', ensure_ascii=False)
+    # sys.exit(1)
+    for line in sys.stdin:
+        if line is not None and len(line) > 3:
+            try:
+                weibo_data = json.loads(line, encoding='utf-8')
+            except Exception as e:
+                continue
+             base_cls=weibo_data
+             jobs_map=get_config_data()
+            if not job_filter(jobs_map, base_cls):
+                continue
+            # print 000
+
+            # if not filter_retweet(base_dict):
+            #     continue
+            # print 111
+
+            # print 222
+
+            base_json = gen_base_dict(base_cls)
+            print base_json
+
